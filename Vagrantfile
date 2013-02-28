@@ -1,10 +1,10 @@
 require 'berkshelf/vagrant'
 
 Vagrant::Config.run do |config|
-  config.vm.host_name = "ruby_quick_installer-berkshelf"
+  config.vm.host_name = "ruby-installer"
 
   config.vm.box = "Opscode-12-04"
-  config.vm.network :hostonly, "33.33.33.50"
+  config.vm.network :hostonly, "33.33.33.60"
 
   # config.vm.forward_port 80, 8080
 
@@ -15,6 +15,7 @@ Vagrant::Config.run do |config|
     chef.json = {}
 
     chef.run_list = [
+      "recipe[omnibus_updater]",
       "recipe[ruby_quick_installer::default]"
     ]
   end
